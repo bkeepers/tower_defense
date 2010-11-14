@@ -10,6 +10,7 @@ class Enemy
 
   def update
     if @path.empty?
+      @window.fortress.damage!
       @window.enemies.delete(self)
     elsif (now  = Time.now) > @previous + 0.5
       @previous = now
