@@ -3,7 +3,7 @@ class Enemy
     @window = window
     @image  = Gosu::Image.new(window, "media/enemy.png", false)
     @square = window.grid.square_at(0, 0)
-    @cost, @path = @square.path_to(@window.tower.square)
+    @cost, @path = @square.path_to(@window.fortress.square)
     @x = @y = @vel_x = @vel_y = @angle = 0.0
     @previous = Time.now - 1
   end

@@ -1,10 +1,10 @@
-class Tower
+class Fortress
   attr_reader :square
   # damage
 
   def initialize(window)
     @window = window
-    @image = Gosu::Image.new(window, "media/tower.png", false)
+    @image = Gosu::Image.new(window, "media/fortress.png", false)
     @square = window.grid.square_at(rand(window.grid.width), window.grid.height - 3)
     @x, @y = window.position_for(@square)
   end

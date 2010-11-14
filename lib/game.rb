@@ -3,17 +3,17 @@ require 'gosu'
 require 'a_star'
 require 'grid'
 require 'enemy'
-require 'tower'
+require 'fortress'
 
 class GameWindow < Gosu::Window
-  attr_reader :grid, :enemies, :tower
+  attr_reader :grid, :enemies, :fortress
 
   def initialize
     super(600, 400, false)
     self.caption  = "Gosu Tutorial Game"
     @background   = Gosu::Image.new(self, "media/sand.png", true)
     @grid         = Grid.new(30, 20)
-    @tower        = Tower.new(self)
+    @fortress     = Fortress.new(self)
     @enemies      = []
   end
 
@@ -31,7 +31,7 @@ class GameWindow < Gosu::Window
 
   def draw
     @background.draw(0, 0, 0)
-    @tower.draw
+    @fortress.draw
     @enemies.each {|e| e.draw }
   end
 
@@ -39,9 +39,6 @@ class GameWindow < Gosu::Window
     close if id == Gosu::Button::KbEscape
   end
 end
-
-# class Board
-# end
 
 window = GameWindow.new
 window.show
