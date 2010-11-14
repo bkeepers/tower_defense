@@ -1,17 +1,24 @@
 require 'rubygems'
 require 'gosu'
+require 'a_star'
+require 'grid'
 require 'enemy'
 require 'tower'
 
 class GameWindow < Gosu::Window
-  attr_reader :enemies
+  attr_reader :grid, :enemies, :tower
 
   def initialize
-    super(640, 480, false)
-    self.caption = "Gosu Tutorial Game"
-    @background = Gosu::Image.new(self, "media/sand.png", true)
-    @tower = Tower.new(self)
-    @enemies = []
+    super(600, 400, false)
+    self.caption  = "Gosu Tutorial Game"
+    @background   = Gosu::Image.new(self, "media/sand.png", true)
+    @grid         = Grid.new(30, 20)
+    @tower        = Tower.new(self)
+    @enemies      = []
+  end
+
+  def position_for(square)
+    [square.x * 20, square.y * 20]
   end
 
   def update

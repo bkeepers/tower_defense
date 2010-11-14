@@ -1,11 +1,12 @@
 class Tower
+  attr_reader :square
   # damage
 
   def initialize(window)
     @window = window
     @image = Gosu::Image.new(window, "media/tower.png", false)
-    @x = rand(@window.width - 20) + 10
-    @y = @window.height - 60
+    @square = window.grid.square_at(rand(window.grid.width), window.grid.height - 3)
+    @x, @y = window.position_for(@square)
   end
 
   def draw

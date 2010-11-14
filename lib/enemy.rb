@@ -1,15 +1,20 @@
 class Enemy
   def initialize(window)
     @window = window
-    @image = Gosu::Image.new(window, "media/enemy.png", false)
+    @image  = Gosu::Image.new(window, "media/enemy.png", false)
+    @square = window.grid.square_at(0, 0)
+    @cost, @path = @square.path_to(@window.tower.square)
     @x = @y = @vel_x = @vel_y = @angle = 0.0
+    @previous = Time.now - 1
   end
 
   def update
-    @x += 1
-    @y += 1
-    if @x > @window.width || @y > @window.height
+    if @path.empty?
       @window.enemies.delete(self)
+    elsif (now  = Time.now) > @previous + 0.5
+      @previous = now
+      @square   = @path.shift
+      @x, @y    = @window.position_for(@square)
     end
   end
 
