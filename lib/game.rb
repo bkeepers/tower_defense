@@ -2,8 +2,10 @@ require 'rubygems'
 require 'gosu'
 require 'a_star'
 require 'grid'
+require 'square'
 require 'enemy'
 require 'fortress'
+require 'tower'
 
 class GameWindow < Gosu::Window
   attr_reader :grid, :enemies, :fortress
@@ -15,10 +17,15 @@ class GameWindow < Gosu::Window
     @grid         = Grid.new(30, 20)
     @fortress     = Fortress.new(self)
     @enemies      = []
+    @towers       = []
   end
 
   def position_for(square)
     [square.x * 20, square.y * 20]
+  end
+
+  def square_at(x, y)
+    grid.square_at((x / 20).to_i, (y / 20).to_i)
   end
 
   def update
@@ -29,14 +36,29 @@ class GameWindow < Gosu::Window
     end
   end
 
+  def needs_cursor?
+    true
+  end
+
   def draw
     @background.draw(0, 0, 0)
     @fortress.draw
+    @towers.each  {|t| t.draw }
     @enemies.each {|e| e.draw }
   end
 
   def button_down(id)
-    close if id == Gosu::Button::KbEscape
+    case id
+    when Gosu::Button::KbEscape
+      close
+    when Gosu::Button::MsLeft
+      add_tower
+    end
+  end
+
+  def add_tower
+    @towers << Tower.new(self, square_at(mouse_x, mouse_y))
+    @enemies.each {|e| e.update_path }
   end
 end
 

@@ -3,9 +3,13 @@ class Enemy
     @window = window
     @image  = Gosu::Image.new(window, "media/enemy.png", false)
     @square = window.grid.square_at(0, 0)
-    @cost, @path = @square.path_to(@window.fortress.square)
     @x = @y = @vel_x = @vel_y = @angle = 0.0
+    update_path
     @previous = Time.now - 1
+  end
+
+  def update_path
+    @cost, @path = @square.path_to(@window.fortress.square)
   end
 
   def update
@@ -20,6 +24,6 @@ class Enemy
   end
 
   def draw
-    @image.draw_rot(@x, @y, 1, @angle, 0.5, 0.5, 0.25, 0.25)
+    @image.draw_rot(@x, @y, 1, @angle, 0.5, 0.5, 0.2, 0.2)
   end
 end
