@@ -1,8 +1,12 @@
-= Tower Defense-ish
+# Tower Defense-ish
 
-To run the game:
+## Setup + Run
 
-    gem install gosu
-    cd lib
-    ruby game.rb
+```ruby
+bundle
+bin/game
+```
 
+## Instructions
+
+Place walls by clicking.
