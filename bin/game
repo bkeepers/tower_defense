@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler"
+Bundler.require(:default)
+
+require_relative "../lib/game"
+
+GameWindow.new.show
