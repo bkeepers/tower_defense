@@ -1,4 +1,6 @@
-require 'gosu'
+require "bundler"
+Bundler.require(:default)
+
 require_relative 'a_star'
 require_relative 'grid'
 require_relative 'square'
