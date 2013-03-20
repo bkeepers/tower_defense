@@ -8,6 +8,8 @@ require_relative 'enemy'
 require_relative 'fortress'
 require_relative 'tower'
 
+Dir.chdir(File.dirname(__FILE__))
+
 class GameWindow < Gosu::Window
   attr_reader :grid, :enemies, :fortress
 
@@ -62,6 +64,3 @@ class GameWindow < Gosu::Window
     @enemies.each {|e| e.update_path }
   end
 end
-
-window = GameWindow.new
-window.show
