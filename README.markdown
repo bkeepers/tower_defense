@@ -2,7 +2,7 @@
 
 ## Setup + Run
 
-```ruby
+```sh
 bundle
 bin/game
 ```
